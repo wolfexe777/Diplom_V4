@@ -152,13 +152,13 @@ def enter_email(request):
         email = request.POST.get('email')
 
         if email:
-            # Если пользователь ввел адрес электронной почты, отправляем результаты
-            send_email(email, request.user, request.session['test_result']['score'], request.session['test_result']['result_message'])
-            del request.session['test_result']
-            return redirect('test_results')
-        else:
-            # Если адрес электронной почты не введен, возвращаем пользователя на страницу ввода
-            return render(request, 'BeckTest/enter_email.html')
+            try:
+                send_email(email, request.user, request.session['test_result']['score'], request.session['test_result']['result_message'])
+                del request.session['test_result']
+                return render(request, 'BeckTest/email_sent.html')  # Создайте шаблон email_sent.html с сообщением об успешной отправке
+            except Exception as e:
+                print(e)  # Выводим ошибку в консоль для отладки
+                return render(request, 'BeckTest/email_error.html')  # Создайте шаблон email_error.html с сообщением об ошибке отправки
 
     return render(request, 'BeckTest/enter_email.html')
 
