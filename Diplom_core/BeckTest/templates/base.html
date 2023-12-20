@@ -1,0 +1,36 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Сайт для тестирования{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% if user.is_authenticated %}
+        <h2>Привет, {{ user.username }}!</h2>
+        <p><a href="{% url 'logout' %}">Выйти</a></p>
+        <a href="{% url 'view_results' %}">Результаты</a>
+        {% else %}
+        <a href="{% url 'signup' %}">Регистрация</a>
+        <a href="{% url 'login' %}">Вход</a>
+        {% endif %}
+        <h1>{% block header %}Сайт для тестирования{% endblock %}</h1>
+        <nav>
+            <ul>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+</body>
+</html>

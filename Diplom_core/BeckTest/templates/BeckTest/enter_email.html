@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+    <h2>Введите адрес электронной почты</h2>
+    <form method="post" action="{% url 'enter_email' %}">
+        {% csrf_token %}
+        <label for="email">Адрес электронной почты:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <input type="submit" value="Отправить">
+    </form>
+{% endblock %}

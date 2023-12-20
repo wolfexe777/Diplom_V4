@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <title>Test Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .result-message {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-message.success {
+            color: #2ecc71;
+        }
+
+        .result-message.error {
+            color: #e74c3c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Результат</h1>
+        <p>Количество баллов: {{ score }}</p>
+        <p class="result-message {% if score > 5 %}success{% else %}error{% endif %}">
+            {{ result_message }}
+        </p>
+    </div>
+</body>
+
+{% endblock %}

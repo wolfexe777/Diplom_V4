@@ -1,0 +1,33 @@
+<!-- view_results.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Ваши результаты теста{% endblock %}
+
+{% block content %}
+  <h2>Ваши результаты теста:</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Дата прохождения</th>
+                    <th>Баллы</th>
+                    <th>Оценка результата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in test_results %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ result.date_completed|default:"N/A" }}</td>
+                        <td>{{ result.score }}</td>
+                        <td>{{ result.result_message}}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+  <!-- Отображение линейного графика -->
+  <h2>График результатов по датам:</h2>
+  <img src="data:image/png;base64,{{ image_base64 }}" alt="График результатов">
+{% endblock %}
