@@ -12,7 +12,11 @@ import base64
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib import messages
 
+
+def home(request):
+    return render(request, 'base.html')
 def test(request):
     if request.method == 'POST':
         score = 0
@@ -100,14 +104,18 @@ def user_login(request):
                     quiz_result_data = request.session['test_result']
                     TestResult.objects.create(user=user, score=quiz_result_data['score'], result_message=quiz_result_data['result_message'])
                     del request.session['test_result']
-                return redirect('test')
+                return redirect('home')
+            else:
+                messages.error(request, 'Неверное имя пользователя или пароль. Попробуйте снова.')
+        else:
+            messages.error(request, 'Неверное имя пользователя или пароль. Попробуйте снова.')
     else:
         form = AuthenticationForm()
     return render(request, 'BeckTest/login.html', {'form': form})
 
 def user_logout(request):
     logout(request)
-    return redirect('test')
+    return redirect('home')
 
 @login_required
 def view_results(request):

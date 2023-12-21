@@ -1,9 +1,15 @@
 from django.urls import path
-from .views import test, signup, user_login, user_logout, view_results, offer_save_result, registration_or_login, enter_email
+from .views import home, test, signup, user_login, user_logout, view_results, offer_save_result, registration_or_login, enter_email, test_results
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+base_html_path = os.path.join(BASE_DIR, 'templates', 'base.html')
 
 urlpatterns = [
-    path('test', test, name='test'),
-    path('test_results/', test, name='test_results'),
+    path('', home, name='home'),
+    path('test/', test, name='test'),
+    path('test_results/', test_results, name='test_results'),
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
