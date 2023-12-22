@@ -1,8 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var currentQuestion = 0;
+            var totalQuestions = {{ questions.count }};
+            var $fieldsets = $('form fieldset');
+
+            function showQuestion() {
+                $fieldsets.attr('hidden', true);
+                $fieldsets.eq(currentQuestion).removeAttr('hidden');
+            }
+
+            $("form").submit(function(e) {
+                e.preventDefault();
+
+                hideQuestion();
+                currentQuestion++;
+                if (currentQuestion < totalQuestions) {
+                    showQuestion();
+                } else {
+                    // Если все вопросы отвечены, отправляем ответы на сервер
+                    $.post('{% url "test" %}', $('form').serialize(), function(data) {
+                        // Рендерим страницу с результатами вместо перехода через JavaScript
+                        $('body').html(data);
+                    });
+                }
+            });
+
+            function hideQuestion() {
+                $fieldsets.eq(currentQuestion).attr('hidden', true);
+            }
+
+            showQuestion();
+        });
+    </script>
+</head>
+<body>
     <div class="container">
-        <h1>Тест: Шкала депрессии Бэка</h1>
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -13,17 +51,33 @@
         <form method="post" action="{% url 'test' %}">
             {% csrf_token %}
             {% for question in questions %}
-                <fieldset>
-                    <legend>{{ question.question_text }}</legend>
-                    {% for choice in question.choice_set.all %}
-                        <label>
-                            <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}">
-                            {{ choice.choice_text }}
-                        </label><br>
-                    {% endfor %}
+                <fieldset class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card" id="question_{{ forloop.counter }}">
+                    <div class="flex flex-col space-y-1.5 bg-gray-100 p-4">
+                        <h3 class="font-semibold text-xl">Вопрос {{ forloop.counter }}</h3>
+                        <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
+                            Шкала депрессии Бэка
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <ul class="mt-4 space-y-2">
+                            {% for choice in question.choice_set.all %}
+                                <li class="font-semibold text-lg text-gray-700 mt-2">
+                                    <input type="radio" id="choice_{{ choice.id }}" class="mr-2" name="question_{{ question.id }}" value="{{ choice.id }}">
+                                    <label for="choice_{{ choice.id }}">{{ choice.choice_text }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </fieldset>
             {% endfor %}
-            <input type="submit" value="{% if currentQuestion == total_questions|add:'-1' %}Закончить{% else %}Далее{% endif %}">
+            <input type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4" value="{% if currentQuestion == total_questions|add:'-1' %}Закончить{% else %}Далее{% endif %}">
         </form>
     </div>
+</body>
 {% endblock %}
+
+
+
+
+
+

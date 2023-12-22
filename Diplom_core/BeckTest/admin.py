@@ -29,14 +29,14 @@ class TestResultInline(admin.TabularInline):
 class CustomUserAdmin(UserAdmin):
     actions_on_top = False
     list_display = (
-        'username', 'email', 'first_name', 'second_name', 'middle_name',
+        'username', 'email', 'first_name', 'second_name', 'middle_name','date_of_birth',
         'phone_number', 'score', 'result_message', 'date_completed'
     )
     search_fields = ('username', 'email', 'first_name', 'second_name', 'phone_number')
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('email', 'first_name', 'second_name', 'middle_name', 'phone_number')}),
+        ('Personal info', {'fields': ('email', 'first_name', 'second_name', 'middle_name', 'phone_number','date_of_birth')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )

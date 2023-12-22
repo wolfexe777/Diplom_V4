@@ -88,9 +88,28 @@ def signup(request):
                 test_result_data = request.session['test_result']
                 TestResult.objects.create(user=user, score=test_result_data['score'], result_message=test_result_data['result_message'])
                 del request.session['test_result']
-            return redirect('test')
+            return redirect('home')
+        else:
+            # Выводим сообщения об ошибках
+            error_messages = {
+                'username': 'Поле "Имя пользователя" содержит ошибку',
+                'first_name': 'Поле "Имя" содержит ошибку',
+                'second_name': 'Поле "Фамилия" содержит ошибку',
+                'middle_name': 'Поле "Отчество" содержит ошибку',
+                'date_of_birth': 'Поле "Дата рождения" содержит ошибку',
+                'email': 'Поле "Email" содержит ошибку',
+                'phone_number': 'Поле "Номер телефона" содержит ошибку',
+                'password1': 'Поле "Пароль" содержит ошибку',
+                'password2': 'Поле "Подтверждение пароля" содержит ошибку.',
+            }
+
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{error_messages.get(field, field.capitalize())}: {error}")
+
     else:
         form = CustomUserCreationForm()
+
     return render(request, 'BeckTest/signup.html', {'form': form})
 
 def user_login(request):

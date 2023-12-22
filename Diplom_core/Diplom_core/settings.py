@@ -133,3 +133,4 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'Wolfexe@yandex.ru'
 EMAIL_HOST_PASSWORD = 'Rtreibyrfq10'
 
+

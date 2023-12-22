@@ -6,6 +6,7 @@ class CustomUser(AbstractUser):
     middle_name = models.CharField(max_length=255, verbose_name='Отчество', blank=True, null=True)
     email = models.EmailField(unique=True, null=False, blank=True)
     phone_number = models.CharField(max_length=15, blank=True, verbose_name='Номер телефона')
+    date_of_birth = models.DateField(max_length=15, blank=True, null=True, verbose_name='Дата рождения')
     groups = models.ManyToManyField(Group, related_name='custom_users', blank=True, verbose_name='Группы')
     user_permissions = models.ManyToManyField(
         Permission, related_name='custom_users', blank=True, verbose_name='Права пользователя'

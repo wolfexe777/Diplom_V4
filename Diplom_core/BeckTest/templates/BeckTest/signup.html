@@ -1,12 +1,53 @@
 {% extends 'base.html' %}
 
-{% block title %}Регистрация{% endblock %}
+{% block title %}User Registration{% endblock %}
 
 {% block content %}
-  <h2>Регистрация</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-  </form>
+<main class="container mx-auto p-6 md:p-10">
+  <div class="flex justify-center mb-8">
+    <div>
+      <h1 class="text-4xl font-bold">Регистрация клиента</h1>
+      <p class="text-lg text-gray-500 mt-2">Пожалуйста, заполните форму регистрации</p>
+    </div>
+  </div>
+  <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
+    <div class="flex flex-col space-y-1.5 bg-gray-100 p-4">
+      <h3 class="font-semibold text-lg">Форма регистрации клиента</h3>
+    </div>
+    <div class="p-4">
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <input class="border rounded w-full p-2" placeholder="Имя пользователя" aria-label="Username" type="text" name="username" />
+        <input class="border rounded w-full p-2" placeholder="Имя" aria-label="First Name" type="text" name="first_name" />
+        <input class="border rounded w-full p-2" placeholder="Фамилия" aria-label="Last Name" type="text" name="last_name" />
+        <input class="border rounded w-full p-2" placeholder="Отчество" aria-label="Middle Name" type="text" name="middle_name" />
+        <input class="border rounded w-full p-2" placeholder="Дата рождения (ДД.ММ.ГГГГ)" aria-label="Date of Birth" type="text" name="date_of_birth"/>
+        <input class="border rounded w-full p-2" placeholder="Email" aria-label="Email" type="email" name="email" />
+        <input class="border rounded w-full p-2" placeholder="Номер телефона" aria-label="Phone Number" type="tel" name="phone_number"/>
+        <input class="border rounded w-full p-2" placeholder="Пароль" aria-label="Password" type="password" name="password1"/>
+        <input class="border rounded w-full p-2" placeholder="Подтверждение пароля" aria-label="Confirm Password" type="password" name="password2"/>
+        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-gray-900 h-10 px-4 py-2 bg-green-500 text-white w-full mt-4">
+          Зарегестрироваться
+        </button>
+      </form>
+      <a class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-gray-700 h-10 px-4 py-2 bg-gray-900 text-white w-full mt-4" href="{% url 'home' %}">Отмена</a>
+    </div>
+  </div>
+</main>
 {% endblock %}
+
+
+
+
+
+
+
