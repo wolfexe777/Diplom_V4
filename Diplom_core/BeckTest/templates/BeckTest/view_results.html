@@ -2,32 +2,58 @@
 
 {% extends 'base.html' %}
 
-{% block title %}Ваши результаты теста{% endblock %}
+{% block title %}Test Results{% endblock %}
 
 {% block content %}
-  <h2>Ваши результаты теста:</h2>
-        <table border="1">
+  <main class="container mx-auto p-6 md:p-10">
+    <div class="flex justify-between mb-8">
+      <div>
+        <h1 class="text-4xl font-bold">Результаты тестов</h1>
+        <p class="text-lg text-gray-600 mt-2">Шкала депрессии Бэка</p>
+      </div>
+    </div>
+    <div class="border bg-card text-card-foreground rounded-md shadow-lg overflow-x-auto" data-v0-t="card">
+      <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+        <h3 class="font-semibold text-lg">Таблица результатов</h3>
+      </div>
+      <div class="p-4">
+        <div class="mt-4">
+          <table class="table-auto w-full mb-8">
             <thead>
-                <tr>
-                    <th>Номер</th>
-                    <th>Дата прохождения</th>
-                    <th>Баллы</th>
-                    <th>Оценка результата</th>
-                </tr>
+              <tr>
+                <th class="px-4 py-2">Номер п/п</th>
+                <th class="px-4 py-2">Дата тестирования</th>
+                <th class="px-4 py-2">Баллы</th>
+                <th class="px-4 py-2">Описание результата</th>
+
+              </tr>
             </thead>
             <tbody>
-                {% for result in test_results %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ result.date_completed|default:"N/A" }}</td>
-                        <td>{{ result.score }}</td>
-                        <td>{{ result.result_message}}</td>
+              {% for result in test_results %}
+                <tr>
+                  <td class="border px-4 py-2">{{ forloop.counter }}</td>
+                  <td class="border px-4 py-2">{{ result.date_completed|default:"N/A" }}</td>
+                  <td class="border px-4 py-2">{{ result.score }}</td>
+                  <td class="border px-4 py-2">{{ result.result_message }}</td>
 
-                    </tr>
-                {% endfor %}
+                </tr>
+              {% endfor %}
             </tbody>
-        </table>
-  <!-- Отображение линейного графика -->
-  <h2>График результатов по датам:</h2>
-  <img src="data:image/png;base64,{{ image_base64 }}" alt="График результатов">
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
+      <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+        <h3 class="font-semibold text-lg">График результатов теста</h3>
+      </div>
+      <div class="p-4">
+        <div class="w-full aspect-[4/3]">
+          <img src="data:image/png;base64,{{ image_base64 }}" alt="Test Graph" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </div>
+  </main>
 {% endblock %}
+
+

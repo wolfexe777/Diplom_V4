@@ -1,77 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <title>Test Results</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        h1 {
-            color: #3498db;
-            text-align: center;
-        }
-
-        p {
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-        .result-message {
-            font-weight: bold;
-            font-size: 1.2em;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .result-message.success {
-            color: #2ecc71;
-        }
-
-        .result-message.error {
-            color: #e74c3c;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Результат</h1>
-        <p>Количество баллов: {{ score }}</p>
-        <p class="result-message {% if score > 5 %}success{% else %}error{% endif %}">
-            {{ result_message }}
-        </p>
-    </div>
-</body>
-
+    <main class="container mx-auto p-6 md:p-10">
+        <div class="flex flex-col items-center mb-8">
+            <h1 class="text-4xl font-bold mb-2">Результаты теста</h1>
+            <div class="w-full bg-white shadow rounded-lg overflow-hidden my-4">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Ваш результат:</div>
+                    <p class="text-gray-700 text-base">{{ score }} баллов</p>
+                </div>
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Описание результата:</div>
+                    <p class="text-gray-700 text-base">{{ result_message }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center mt-12">
+            <a class="underline text-blue-500" href="#">
+                Вернуться ко всем тестам
+            </a>
+        </div>
+    </main>
 {% endblock %}

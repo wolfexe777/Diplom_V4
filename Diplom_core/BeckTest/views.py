@@ -5,7 +5,9 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 import matplotlib
+import numpy as np
 matplotlib.use('Agg')
 from io import BytesIO
 import base64
@@ -152,15 +154,34 @@ def view_results(request):
     dates = [result.date_completed.strftime('%d-%m-%Y') if result.date_completed else 'N/A' for result in test_results]
     scores = [result.score for result in test_results]
 
-    # Строим линейный график
-    plt.plot(dates, scores, marker='o')
-    plt.title('Результаты теста по датам')
+    # Создаем массив индексов для баров
+    bar_width = 0.2
+    x = np.arange(len(dates))
+
+    # Строим гистограмму
+    fig, ax = plt.subplots()
+    bars = ax.bar(x, scores, color='#3CB371', width=bar_width)
+
+    plt.title('')
     plt.xlabel('Дата прохождения')
     plt.ylabel('Баллы')
+    plt.xticks(x, dates, rotation='horizontal')
 
-    # Добавляем метки с датами
-    for i, date in enumerate(dates):
-        plt.text(date, scores[i], date, fontsize=8, ha='right', va='bottom')
+    # Устанавливаем максимальное количество целых чисел на оси Y
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    # Добавляем метки с целыми баллами внутри столбцов
+    for bar, score in zip(bars, scores):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width() / 2, height / 2, str(int(score)),
+                ha='center', va='center', fontsize=12, color='black')
+
+    # Убираем линии справа и сверху
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.yaxis.set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['bottom'].set_color('gray')
 
     # Сохраняем график в байтовом объекте
     image_stream = BytesIO()

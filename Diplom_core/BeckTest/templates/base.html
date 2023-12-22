@@ -9,157 +9,159 @@
     <title>{% block title %}Тесты по психологии{% endblock %}</title>
 </head>
 
-<main class="container mx-auto p-6 md:p-10">
-    <div class="flex justify-between mb-8">
-        <div>
-            <h1 class="text-4xl font-bold">Психологические тесты</h1>
-            <p class="text-lg text-blue-500 mt-2">"Высота" центр когнитивных технологий </p>
-        </div>
-        <div class="flex gap-4">
-            {% if user.is_authenticated %}
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
-                    onclick="window.location.href='{% url 'logout' %}'">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-4 h-4 mr-2"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    Выйти
-                </button>
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
-                    onclick="window.location.href='{% url 'view_results' %}'">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-4 h-4 mr-2"
-                    >
-                      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
-                      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
-                    </svg>
-                    Результаты тестов
-                </button>
-            {% else %}
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
-                    onclick="window.location.href='{% url 'login' %}'">
+<body class="min-h-screen bg-blue-100">
+    <main class="container mx-auto p-6 md:p-10 bg-blue-100">
+        <div class="flex justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold">Психологические тесты</h1>
+                <p class="text-xl text-blue-500 mt-2">"Высота" центр когнитивных технологий </p>
+            </div>
+            <div class="flex gap-4">
+                {% if user.is_authenticated %}
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
+                        onclick="window.location.href='{% url 'logout' %}'">
                         <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-4 h-4 mr-2"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    Вход
-                </button>
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
-                    onclick="window.location.href='{% url 'signup' %}'">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-4 h-4 mr-2"
-                    >
-                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                      <polyline points="10 17 15 12 10 7"></polyline>
-                      <line x1="15" x2="3" y1="12" y2="12"></line>
-                    </svg>
-                    Регистрация
-                </button>
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="w-4 h-4 mr-2"
+                        >
+                          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Выйти
+                    </button>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
+                        onclick="window.location.href='{% url 'view_results' %}'">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="w-4 h-4 mr-2"
+                        >
+                          <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
+                          <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
+                        </svg>
+                        Результаты тестов
+                    </button>
+                {% else %}
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
+                        onclick="window.location.href='{% url 'login' %}'">
+                            <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="w-4 h-4 mr-2"
+                        >
+                          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Вход
+                    </button>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-500 text-white hover:bg-black h-10 px-4 py-2 mt-4"
+                        onclick="window.location.href='{% url 'signup' %}'">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="w-4 h-4 mr-2"
+                        >
+                          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                          <polyline points="10 17 15 12 10 7"></polyline>
+                          <line x1="15" x2="3" y1="12" y2="12"></line>
+                        </svg>
+                        Регистрация
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+        {% block content %}
+            {% if user.is_authenticated %}
+            <div class="bg-blue-100 p-6 mb-8 rounded-md">
+                <h2 class="text-xl font-semibold mb-2">Добро пожаловать {{user.username}}!</h2>
+                <p class="text-lg text-gray-600">Готовы пройти тестирование? Тогды выбирайте тест и нажимайте на кнопку "Начать тест"</p>
+            </div>
+            {% else %}
+                <div class="bg-gray-100 p-6 mb-8 rounded-md">
+                <h2 class="text-xl font-semibold mb-2">Вы не авторизованы!</h2>
+                <p class="text-lg text-gray-600">Пожалуйста, авторизуйтесь или пройдите регистрацию.</p>
+            </div>
             {% endif %}
-        </div>
-    </div>
-    {% block content %}
-        {% if user.is_authenticated %}
-        <div class="bg-gray-100 p-6 mb-8 rounded-md">
-            <h2 class="text-xl font-semibold mb-2">Добро пожаловать {{user.username}}!</h2>
-            <p class="text-lg text-gray-600">Готовы пройти тестирование? Тогды выбирайте тест и нажимайте на кнопку "Начать тест"</p>
-        </div>
-        {% else %}
-            <div class="bg-gray-100 p-6 mb-8 rounded-md">
-            <h2 class="text-xl font-semibold mb-2">Вы не авторизованы!</h2>
-            <p class="text-lg text-gray-600">Пожалуйста, авторизуйтесь или пройдите регистрацию.</p>
-        </div>
-        {% endif %}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
-            <div class="flex flex-col space-y-1.5 bg-gray-100 p-4">
-                <h3 class="font-semibold text-xl">Шкала депрессии Бэка</h3>
-                <div class="inline-flex items-center rounded-full border px-1 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
-                    21 вопрос
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
+                <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+                    <h3 class="font-semibold text-xl">Шкала депрессии Бэка</h3>
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
+                        21 вопрос
+                    </div>
+                </div>
+                <div class="p-4">
+                    <p class="text-gray-600">Вам предлагается ряд утверждений. Выберите одно утверждение в каждой группе, которое лучше всего описывает ваше состояние за прошедшую неделю, включая сегодняшний день.</p>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4" onclick="window.location.href='{% url 'test' %}'">
+                        Начать тест
+                    </button>
                 </div>
             </div>
-            <div class="p-4">
-                <p class="text-gray-500">Вам предлагается ряд утверждений. Выберите одно утверждение в каждой группе, которое лучше всего описывает ваше состояние за прошедшую неделю, включая сегодняшний день.</p>
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4" onclick="window.location.href='{% url 'test' %}'">
-                    Начать тест
-                </button>
-            </div>
-        </div>
-        <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
-            <div class="flex flex-col space-y-1.5 bg-gray-100 p-4">
-                <h3 class="font-semibold text-lg">Stress Level Test</h3>
-                <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
-                    15 Questions
+            <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
+                <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+                    <h3 class="font-semibold text-lg">Stress Level Test</h3>
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
+                        15 Questions
+                    </div>
+                </div>
+                <div class="p-4">
+                    <p class="text-gray-500">This test is designed to measure your stress levels.</p>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4">
+                        Начать тест
+                    </button>
                 </div>
             </div>
-            <div class="p-4">
-                <p class="text-gray-500">This test is designed to measure your stress levels.</p>
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4">
-                    Начать тест
-                </button>
-            </div>
-        </div>
-        <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
-            <div class="flex flex-col space-y-1.5 bg-gray-100 p-4">
-                <h3 class="font-semibold text-lg">Mental Health Test</h3>
-                <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
-                    20 Questions
+            <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
+                <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+                    <h3 class="font-semibold text-lg">Mental Health Test</h3>
+                    <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
+                        20 Questions
+                    </div>
+                </div>
+                <div class="p-4">
+                    <p class="text-gray-500">This test is designed to assess your mental health.</p>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4">
+                        Начать тест
+                    </button>
                 </div>
             </div>
-            <div class="p-4">
-                <p class="text-gray-500">This test is designed to assess your mental health.</p>
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4">
-                    Начать тест
-                </button>
-            </div>
         </div>
-    </div>
-    <div class="flex justify-center items-center mt-12">
-        <a class="underline text-blue-500" href="#">
-            View All Tests
-        </a>
-    </div>
-    {% endblock %}
-</main>
+        <div class="flex justify-center items-center mt-12">
+            <a class="underline text-blue-500" href="#">
+                View All Tests
+            </a>
+        </div>
+        {% endblock %}
+    </main>
+</body>
 </html>
 
