@@ -7,18 +7,16 @@
             <div class="w-full bg-white shadow rounded-lg overflow-hidden my-4">
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">Ваш результат:</div>
-                    <p class="text-gray-700 text-base">{{ score }} баллов</p>
+                    <p class="text-gray-700 text-lg">{{ score }} баллов</p>
                 </div>
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">Описание результата:</div>
-                    <p class="text-gray-700 text-base">{{ result_message }}</p>
+                    <p class="text-gray-700 text-lg">{{ result_message }}</p>
                 </div>
             </div>
-        </div>
-        <div class="flex justify-center items-center mt-12">
-            <a class="underline text-blue-500" href="#">
-                Вернуться ко всем тестам
-            </a>
+            <div class="flex justify-center items-center mt-12">
+            <a class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-gray-700 h-10 px-4 py-2 bg-gray-900 text-white w-full mt-4" href="{% url 'home' %}">На главную страницу</a>
+            </div>
         </div>
     </main>
 {% endblock %}

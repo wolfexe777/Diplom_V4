@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все результаты тестов</title>
+</head>
+<body>
+    <h2>Все результаты тестов</h2>
+    <p>Привет, {{ user.username }}!</p>
+
+    {% if all_results %}
+        <p>Ваши результаты тестов:</p>
+        <ul>
+            {% for result in all_results %}
+                <li>
+                    <strong>Дата завершения теста:</strong> {{ result.date_completed|default:"N/A" }}<br>
+                    <strong>Баллы:</strong> {{ result.score }}<br>
+                    <strong>Сообщение:</strong> {{ result.result_message }}<br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>У вас нет результатов тестов.</p>
+    {% endif %}
+</body>
+</html>

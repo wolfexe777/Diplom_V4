@@ -5,7 +5,6 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
 import matplotlib
 import numpy as np
 matplotlib.use('Agg')
@@ -138,14 +137,6 @@ def user_logout(request):
     logout(request)
     return redirect('home')
 
-@login_required
-def view_results(request):
-    user_results = TestResult.objects.filter(user=request.user)
-    return render(request, 'BeckTest/view_results.html', {'user_results': user_results})
-
-def registration_or_login(request):
-    return render(request, 'BeckTest/registration_or_login.html')
-
 def view_results(request):
     # Получаем результаты теста для текущего пользователя
     test_results = TestResult.objects.filter(user=request.user).order_by('date_completed')
@@ -155,7 +146,7 @@ def view_results(request):
     scores = [result.score for result in test_results]
 
     # Создаем массив индексов для баров
-    bar_width = 0.2
+    bar_width = 0.4
     x = np.arange(len(dates))
 
     # Строим гистограмму
@@ -163,18 +154,15 @@ def view_results(request):
     bars = ax.bar(x, scores, color='#3CB371', width=bar_width)
 
     plt.title('')
-    plt.xlabel('Дата прохождения')
-    plt.ylabel('Баллы')
+    plt.xlabel('')
+    plt.ylabel('')
     plt.xticks(x, dates, rotation='horizontal')
-
-    # Устанавливаем максимальное количество целых чисел на оси Y
-    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # Добавляем метки с целыми баллами внутри столбцов
     for bar, score in zip(bars, scores):
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width() / 2, height / 2, str(int(score)),
-                ha='center', va='center', fontsize=12, color='black')
+                ha='center', va='center', fontsize=10, color='black')
 
     # Убираем линии справа и сверху
     ax.spines['right'].set_visible(False)
@@ -182,6 +170,9 @@ def view_results(request):
     ax.yaxis.set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.spines['bottom'].set_color('gray')
+
+    # Устанавливаем размер шрифта для оси X
+    ax.tick_params(axis='x', labelsize=8)
 
     # Сохраняем график в байтовом объекте
     image_stream = BytesIO()
@@ -198,15 +189,16 @@ def view_results(request):
 def enter_email(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-
         if email:
             try:
                 send_email(email, request.user, request.session['test_result']['score'], request.session['test_result']['result_message'])
                 del request.session['test_result']
-                return render(request, 'BeckTest/email_sent.html')  # Создайте шаблон email_sent.html с сообщением об успешной отправке
+                success_message = 'Письмо успешно отправлено.'
+                return render(request, 'BeckTest/enter_email.html', {'success_message': success_message})
             except Exception as e:
                 print(e)  # Выводим ошибку в консоль для отладки
-                return render(request, 'BeckTest/email_error.html')  # Создайте шаблон email_error.html с сообщением об ошибке отправки
+                error_message = 'Ошибка отправки письма. Пожалуйста, попробуйте еще раз.'
+                return render(request, 'BeckTest/enter_email.html', {'error_message': error_message})
 
     return render(request, 'BeckTest/enter_email.html')
 
