@@ -44,7 +44,6 @@ def test(request):
     return render(request, 'BeckTest/test.html', {'questions': questions})
 
 
-@login_required
 def offer_save_result(request):
     if request.method == 'POST':
         save_result_choice = request.POST.get('save_result_choice')
@@ -54,7 +53,7 @@ def offer_save_result(request):
             return redirect('registration_or_login')
         elif save_result_choice == 'no':
             # Если пользователь отказывается, перенаправляем на главную страницу
-            return redirect('test')  # Замените 'home' на ваш URL-путь к главной странице
+            return redirect('home')
         elif save_result_choice == 'send_email':
             # Если пользователь хочет отправить результаты на электронную почту, перенаправляем на страницу ввода адреса
             return redirect('enter_email')

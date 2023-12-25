@@ -3,26 +3,25 @@
 {% block title %}Вход{% endblock %}
 
 {% block content %}
-  <main class="container mx-auto p-6 md:p-10">
-    <div class="mb-8">
+  <main class="container mx-auto p-6 md:p-10 ">
+    <div class="flex justify-center mb-8">
       <div>
         <h1 class="text-3xl font-bold">Отправка Email</h1>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card">
-        <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+      <div class="border bg-card text-card-foreground rounded-md shadow-lg max-w-lg mx-auto " data-v0-t="card">
+        <div class="flex flex-col space-y-1.5 bg-blue-300 rounded-md p-4 flex items-center justify-center">
           <h3 class="font-semibold text-lg">Электронная почта</h3>
         </div>
         <div class="p-4">
           {% if success_message %}
-            <p class="text-green-500">{{ success_message }}</p>
+            <p class="text-green-500 text-xl">{{ success_message }}</p>
           {% elif error_message %}
-            <p class="text-red-500">{{ error_message }}</p>
+            <p class="text-red-500 text-xl">{{ error_message }}</p>
           {% endif %}
 
-          <p class="text-gray-500">
+          <p class="text-gray-900">
             Пожалуйста, введите свой адрес электронной почты в поле ниже. Мы отправим результаты Вашего тестирования на этот адрес.
           </p>
           <form method="post" action="{% url 'enter_email' %}" class="mt-4">
@@ -47,7 +46,6 @@
           </form>
         </div>
       </div>
-    </div>
   </main>
 {% endblock %}
 

@@ -39,7 +39,17 @@
         });
     </script>
 </head>
-<body>
+    <div class="flex justify-left max-w-4xl mx-left mb-4 mt-20 ">
+    <div>
+      <h1 class="text-gray-700 text-2xl font-bold">Тестовые вопросы по шкале депрессии Бэка, BDI.</h1>
+      <p class="text-lg text-gray-700 mt-2">В этом опроснике содержатся группы утверждений. Внимательно прочитайте каждую
+группу утверждений. Затем определите в каждой группе одно утверждение, которое лучше всего
+соответствует тому, как Вы себя чувствовали НА ЭТОЙ НЕДЕЛЕ И СЕГОДНЯ. Поставьте галочку
+около выбранного утверждения. Если несколько утверждений из одной группы кажутся Вам одинаково
+хорошо подходящими, то поставьте галочки около каждого из них. Прежде, чем сделать свой выбор,
+убедитесь, что Вы прочли Все утверждения в каждой группе.</p>
+    </div>
+    </div>
     <div class="container">
         {% if messages %}
             <ul class="messages">
@@ -51,11 +61,11 @@
         <form method="post" action="{% url 'test' %}">
             {% csrf_token %}
             {% for question in questions %}
-                <fieldset class="border bg-card text-card-foreground rounded-md shadow-lg" data-v0-t="card" id="question_{{ forloop.counter }}">
-                    <div class="flex flex-col space-y-1.5 bg-blue-200 p-4">
+                <fieldset class="border bg-card text-card-foreground rounded-md shadow-3xl max-w-4xl mx-left" data-v0-t="card" id="question_{{ forloop.counter }}">
+                    <div class="flex flex-col space-y-1.5 bg-blue-300 rounded-md p-4">
                         <h3 class="font-semibold text-xl">Вопрос {{ forloop.counter }}</h3>
-                        <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
-                            Шкала депрессии Бэка
+                        <div class="inline-flex items-center rounded-full border py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mt-2">
+                        Шкала депрессии Бэка
                         </div>
                     </div>
                     <div class="p-4">
@@ -70,7 +80,8 @@
                     </div>
                 </fieldset>
             {% endfor %}
-            <input type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-800 h-10 px-4 py-2 mt-4" value="{% if currentQuestion == total_questions|add:'-1' %}Закончить{% else %}Далее{% endif %}">
+            <input type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-700 h-10 px-4 py-2 mt-4 cursor-pointer" value="{% if currentQuestion == total_questions|add:'-1' %}Закончить{% else %}Далее{% endif %}">
+            <a class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white hover:bg-gray-700 h-10 px-4 py-2 mt-4 cursor-pointer" href="{% url 'home' %}">На главную страницу</a>
         </form>
     </div>
 </body>
